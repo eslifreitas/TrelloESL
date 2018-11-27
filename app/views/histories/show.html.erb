@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @history.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @history.status %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @history.description %>
+</p>
+
+<p>
+  <strong>Started at:</strong>
+  <%= @history.started_at %>
+</p>
+
+<p>
+  <strong>Finished at:</strong>
+  <%= @history.finished_at %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @history.deadline %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @history.points %>
+</p>
+
+<p>
+  <strong>Requester:</strong>
+  <%= @history.requester.name %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @history.owner.name %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @history.project.name %>
+</p>
+
+<%= link_to 'Edit', edit_history_path(@history) %> |
+<%= link_to 'Back', histories_path %>

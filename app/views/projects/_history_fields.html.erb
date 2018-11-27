@@ -1,0 +1,37 @@
+<div class="nested-fields">
+    <div class="field">
+
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control"  %>  
+
+        <%= f.label :status %>
+        <%= f.text_field :status, class: "form-control" %>
+
+        <%= f.label :description %>
+        <%= f.text_field :description, class: "form-control" %>
+
+        <%= f.label :started_at %>
+        <%= f.date_select :started_at, class: "form-control" %>
+
+        <%= f.label :finished_at %>
+        <%= f.date_select :finished_at, class: "form-control" %>
+
+        <%= f.label :deadline %>
+        <%= f.date_select :deadline, class: "form-control" %>
+
+        <%= f.label :points %>
+        <%= f.number_field :points, class: "form-control" %>
+        
+        <div class="dropdown">            
+            <%= f.label :requester_id %>
+            <%= f.collection_select(:requester_id, @person_options_for_select, :id, :name, {:include_blank => true}, {:class => "form-control"}) %>
+        </div>
+
+        <%= f.label :owner_id %>
+        <%= f.collection_select(:owner_id, @person_options_for_select, :id, :name, {:include_blank => true}, {:class => "form-control"}) %>
+            
+        <%= link_to_remove_association('Remover', f) %>
+
+        <%= f.label "-----------------" %>
+    </div>   
+</div>

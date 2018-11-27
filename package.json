@@ -1,0 +1,20 @@
+{
+  "name": "TrelloESL",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "bulma": "^0.7.2",
+    "vue": "^2.5.17",
+    "vue-container": "^1.1.1",
+    "vue-flex": "^2.1.2",
+    "vue-layout": "^0.0.0",
+    "vue-loader": "14.2.2",
+    "vue-resource": "^1.5.1",
+    "vue-select": "^2.5.1",
+    "vue-template-compiler": "^2.5.17",
+    "vue-turbolinks": "^2.0.3"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
+}

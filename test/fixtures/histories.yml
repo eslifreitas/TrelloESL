@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  requester_id: 1
+  status: MyString
+  owner_id: 1
+  description: MyText
+  started_at: 2018-11-12 21:10:33
+  finished_at: 2018-11-12 21:10:33
+  deadline: 2018-11-12 21:10:33
+  points: 1
+
+two:
+  name: MyString
+  requester_id: 1
+  status: MyString
+  owner_id: 1
+  description: MyText
+  started_at: 2018-11-12 21:10:33
+  finished_at: 2018-11-12 21:10:33
+  deadline: 2018-11-12 21:10:33
+  points: 1

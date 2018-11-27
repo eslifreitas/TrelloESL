@@ -1,0 +1,53 @@
+<% project = @project %> 
+
+<%= form_with(model: project, local: true) do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<script>
+  $.notify("<%= notice %>", "success");
+</script>  
+
+<div class="panel panel-primary">
+     <div class="panel-heading">
+        <p>
+          <%= @project.name %></div>
+        </p>
+      
+        <p>
+          <strong>Manager:</strong>
+          <%= @project.manager.name %>
+        </p>
+    </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">HISTORIES</div>
+
+      <div id="histories">   
+        <%= form.fields_for :histories do |histories_fields| %>
+          <%= render partial: "history_fields", locals: {f: histories_fields} %>              
+        <% end %>
+        <div class="field">
+          <%= link_to_add_association("[Adicionar History]", form, :histories) %>
+          <%= form.label :histories, "<span class=aria-hidden='true'></span>".html_safe %>     
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
