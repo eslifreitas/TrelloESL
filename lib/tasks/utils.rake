@@ -12,7 +12,7 @@ namespace :utils do
             )            
     end
     puts "PERSONS [DONE]"
-
+    
     puts "CREATING PROJECTS"
     Person.all.each do |person|
         Project.create!(

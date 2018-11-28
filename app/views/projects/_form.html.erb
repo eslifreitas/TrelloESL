@@ -3,53 +3,54 @@
 <% end %>
 
 <%= content_tag :div, id: 'project-form', data: { project: project.to_json(except: [:created_at, :updated_at]) } do %>
-    
-  <div v-if="errors.length" class="alert alert-warning" role="alert">      
-    <b>Campos obrigatórios:</b>
-    <ul>
-      <li v-for="error in errors">{{ error }}</li>
-    </ul>            
-  </div>  
-
-  <div class="form-group">
-    <label for="name" class="cols-sm-2 control-label">Projeto</label>
-    <div class="cols-sm-10">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
-        <input type="text" class="form-control" type="text" v-model="project.name"/>
-      </div>
-    </div>
-  </div>
-    
-  <div class="form-group">
-    <label for="name" class="cols-sm-2 control-label">Gerente</label>
-    <div class="cols-sm-10">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
-        <select v-model="project.manager_id" class="form-control">
-          <option/>
-          <%= options_from_collection_for_select(@person_options_for_select, :id, :name, project.manager.id) %>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group ">
-    <button @click="validateProject() ? saveProject($event) : false"  class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#exampleModal">Salvar</button>	    
-  </div>
-
-  <div v-if="bDataSaved" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-
-        <div class="modal-body">
-          <b>Registro salvo com sucesso!</b>         
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="main-login main-center">   
+    <div v-if="errors.length" class="alert alert-warning" role="alert">      
+      <b>Campos obrigatórios:</b>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>            
+    </div>  
   
+    <div class="form-group">
+      <label for="name" class="cols-sm-2 control-label">Projeto</label>
+      <div class="cols-sm-10">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+          <input type="text" class="form-control" type="text" v-model="project.name"/>
+        </div>
+      </div>
+    </div>
+      
+    <div class="form-group">
+      <label for="name" class="cols-sm-2 control-label">Gerente</label>
+      <div class="cols-sm-10">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+          <select v-model="project.manager_id" class="form-control">
+            <option/>
+            <%= options_from_collection_for_select(@person_options_for_select, :id, :name, project.manager.id) %>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <button @click="validateProject() ? saveProject($event) : false"  class="btn btn-success btn-sm btn-block" data-toggle="modal" data-target="#exampleModal">Salvar</button>	    
+      <%= link_to 'Cancelar', projects_path , class:"btn btn-danger btn-sm btn-block"%>
+    </div>
+
+    <div v-if="bDataSaved" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body">
+            <b>Registro salvo com sucesso!</b>         
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>

@@ -62,7 +62,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'cocoon'
+gem "cocoon"
 gem "jquery-rails"
 gem "rails-assets-bootstrap", "3.3.6", source: "https://rails-assets.org"
-gem 'notifyjs_rails'
+gem "notifyjs_rails"

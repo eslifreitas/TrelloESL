@@ -7,13 +7,14 @@ Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load',() => 
 {
-  Vue.http.headers.common['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  Vue.http.headers.common['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  Vue.http.headers.common['Authorization'] = 'Bearer TOKEN';
 
-  var element = document.getElementById('project-form')
+  var element = document.getElementById('project-form');
 
   if(element != null)
   {
-    var project = JSON.parse(element.dataset.project)
+    var project = JSON.parse(element.dataset.project);
 
     var app = new Vue(
     {
@@ -28,9 +29,9 @@ document.addEventListener('turbolinks:load',() =>
       methods: {
         saveProject: function(e) {   
           if (project.id == null){
-            this.$http.post('/projects', {project: this.project}).then(response => {
-              console.log(response);         
-              Turbolinks.visit("/projects/"+project.id)                                     
+            this.$http.post('/projects', {project: this.project}).then(response => {                       
+              this.project = response.data;              
+              Turbolinks.visit('/projects/'+this.project.id)                                     
               }, 
               response => {
                 console.log(response)
@@ -38,8 +39,9 @@ document.addEventListener('turbolinks:load',() =>
             )
           }
           else {
-            this.$http.put('/projects/'+project.id, {project: this.project}).then(response => {             
-              Turbolinks.visit('/projects/'+project.id);
+            this.$http.put('/projects/'+project.id, {project: this.project}).then(response => {     
+              this.project = response.data;        
+              Turbolinks.visit('/projects/'+this.project.id);
               }, 
               response => {
                 console.log(response)
@@ -50,6 +52,7 @@ document.addEventListener('turbolinks:load',() =>
         validateProject: function(){
           this.errors = [];
           this.bDataSaved = false;
+          
 
           if(!this.project.name) {            
             this.errors.push("Nome obrigatório");                     
