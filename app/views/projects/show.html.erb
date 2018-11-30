@@ -1,49 +1,36 @@
 <% project = @project %> 
 
-<%= form_with(model: project, local: true) do |form| %>
-  <% if project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<% content_for :head do %>
+  <%= javascript_pack_tag 'projects' %>
+<% end %>
 
+<%= content_tag :div, id: 'project-form', data: { project: project.to_json(except: [:created_at, :updated_at]) } do %>
+  <div class="main-login main-center">   
+    <div v-if="errors.length" class="alert alert-warning" role="alert">      
+      <b>Campos obrigatórios:</b>
       <ul>
-      <% project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<div class="panel panel-primary">
-     <div class="panel-heading">
-        <p>
-          <%= @project.name %></div>
-        </p>
-      
-        <p>
-          <strong>Manager:</strong>
-          <%= @project.manager.name %>
-        </p>
-    </div>
-
-  <div class="panel panel-info">
-    <div class="panel-heading">HISTORIES</div>
-
-      <div id="histories">   
-        <%= form.fields_for :histories do |histories_fields| %>
-          <%= render partial: "history_fields", locals: {f: histories_fields} %>              
-        <% end %>
-        <div class="field">
-          <%= link_to_add_association("[Adicionar History]", form, :histories) %>
-          <%= form.label :histories, "<span class=aria-hidden='true'></span>".html_safe %>     
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>            
+    </div>  
+  
+    <div class="form-group">
+      <label for="name" class="cols-sm-2 control-label">Projeto</label>
+      <div class="cols-sm-10">
+        <div class="input-group">
+          <label><%= @project.name %></label>
         </div>
       </div>
+    </div>
 
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-    <% end %>
-  </div>
-</div>
+    <div class="form-group">
+      <label for="name" class="cols-sm-2 control-label">Gerente</label>
+      <div class="cols-sm-10">
+        <div class="input-group">                   
+          <label><%= @project.manager.name %></label>
+        </div>
+      </div>      
+    </div>  
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+  </div>  
+<% end %>
+

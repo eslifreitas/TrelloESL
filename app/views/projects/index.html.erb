@@ -1,24 +1,43 @@
 <script>
   $.notify("<%= notice %>", "success");
-</script>  
+</script>   
 
-<div class="container-fluid">
-  <h1>PROJETOS</h1>
-  <br/>
-  <div class="row" style="background-color: #f0f0f0; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-    <div class="col-sm-5" style="background-color:lavender;"><b>Projeto</b></div>
-    <div class="col-sm-5" style="background-color:lavenderblush;"><b>Gerente</b></div>
-    <div class="col-sm-2" style="background-color:lavender;"><b>Ações</b></div>            
-  </div>    
+<% contRow = 0 %>
+<div class="row">
   <% @projects.each do |project| %>    
-    <div class="row">
-      <div class="col-sm-5" style="background-color:lavender;"><%= project.name %></div>
-      <div class="col-sm-5" style="background-color:lavenderblush;"><%= project.manager.name %></div>
-      <div class="col-sm-2" style="background-color:lavender;"><%= link_to("Visualizar", project, class: "class='btn btn-primary btn-sm'") %>
-                                                               <%= link_to("Editar", edit_project_path(project), class: "class='btn btn-warning btn-sm'") %>
-                                                               <%= link_to("Deletar", project, method: :delete, class: "class='btn btn-danger btn-sm'", data: { confirm: "Confirma a exclusão?" }) %></div>
-    </div>
+
+    <% if contRow % 4 == 0 %>    
+      </div> <!-- div class="row" -->      
+      <div class="row">
+    <% end %>
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-primary o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-comments"></i>
+              </div>
+              <div class="mr-5"><b><%= project.name %><br/><%= project.manager.name %></b></div>
+            </div>
+            <div class="card-footer text-white clearfix small z-1" >
+              <span class="float-left">              
+                <%= link_to(project, class: "btn btn-success btn-lg", method: :get) do %>
+                  <i class='fa fa-list'></i>
+                <% end %>
+                <%= link_to(edit_project_path(project), class: "btn btn-warning btn-lg", :method => :get) do %>
+                  <i class='fa fa-check'></i>
+                <% end %> 
+                <%= link_to(project, method: :delete, class: "btn btn-danger btn-lg", data: { confirm: "Confirma a exclusão?"}) do %>
+                  <i class='fa fa-times'></i>
+                <% end %>
+              </span>              
+            </div>
+          </div>
+        </div>
+    <% contRow = contRow + 1 %>
+
   <% end %>
+</div>   <!-- div class="row"  -->
+
 </div>
 
 <br>

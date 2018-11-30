@@ -20,5 +20,12 @@
 //= require bootstrap
 //= require notifyjs_rails
 
+//= require bootstrap.bundle.min
+//= require jquery.easing.min
+//= require jquery.dataTables
+//= require dataTables.bootstrap4.min
+//= require sb-admin.min
+
+
 
 //= require_tree .
