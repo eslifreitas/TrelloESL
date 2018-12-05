@@ -21,8 +21,7 @@ document.addEventListener('turbolinks:load',() =>
       el: element,
       data() {
         return{
-          errors: [],
-          bDataSaved: false,
+          errors: [],          
           project: project
         }
       },
@@ -51,9 +50,7 @@ document.addEventListener('turbolinks:load',() =>
         },
         validateProject: function(){
           this.errors = [];
-          this.bDataSaved = false;
           
-
           if(!this.project.name) {            
             this.errors.push("Nome obrigatório");                     
           }

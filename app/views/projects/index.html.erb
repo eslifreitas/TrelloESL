@@ -6,16 +6,16 @@
 <div class="row">
   <div class="col-xl-3 col-sm-6 mb-3">
     <span class="float-left"> 
-      <a class="btn btn-success btn-sm"><i class='fa fa-plus'></i></a>
+        <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#joinProject"><i class='fa fa-plus'></i></a> 
     </span>
   </div>
 </div>
 
-<% contRow = 0 %>
+<% countRow = 0 %>
 <div class="row">
   <% @projects.each do |project| %>    
 
-    <% if contRow % 4 == 0 %>    
+    <% if countRow % 4 == 0 %>    
       </div> <!-- div class="row" -->      
       <div class="row">
     <% end %>
@@ -42,13 +42,23 @@
             </div>
           </div>
         </div>
-    <% contRow = contRow + 1 %>
+    <% countRow = countRow + 1 %>
 
   <% end %>
 </div>   <!-- div class="row"  -->
 
-</div>
-
+<!-- modal Project -->
+<div class="modal fade" id="joinProject" tabindex="-1" role="dialog" aria-labelledby="Projetos" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="projectsTitle">Projeto</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <%= render 'form', project: @project %>       
+    </div>
+  </div>
+</div>-
 <br>
-
-<%= link_to 'New Project', new_project_path %>

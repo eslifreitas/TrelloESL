@@ -1,11 +1,13 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :set_options_person_for_select, only: [:show, :new, :edit, :update, :create]
+  before_action :set_options_person_for_select, only: [:index, :show, :new, :edit, :update, :create]
 
   # GET /projects
   # GET /projects.json
   def index
     @projects = Project.all
+    @project = Project.new
+    @project.build_manager
   end
 
   # GET /projects/1

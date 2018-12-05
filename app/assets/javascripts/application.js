@@ -17,7 +17,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require cocoon
-//= require bootstrap
 //= require notifyjs_rails
 
 //= require bootstrap.bundle.min
