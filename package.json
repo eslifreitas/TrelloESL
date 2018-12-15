@@ -6,6 +6,7 @@
     "bulma": "^0.7.2",
     "vue": "^2.5.17",
     "vue-container": "^1.1.1",
+    "vue-draggable": "^1.0.6",
     "vue-flex": "^2.1.2",
     "vue-layout": "^0.0.0",
     "vue-loader": "14.2.2",

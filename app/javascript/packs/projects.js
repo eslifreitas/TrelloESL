@@ -59,8 +59,7 @@ document.addEventListener('turbolinks:load',() =>
             this.errors.push("Gerente obrigatório");
           }
 
-          if(!this.errors.length){
-            this.bDataSaved=true;         
+          if(!this.errors.length){            
             return true;
           }
         }

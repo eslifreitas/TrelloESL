@@ -29,6 +29,11 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+   
 <% end %>
 
+<div id="teste"></div>
+<% content_for :footer do %>
+    <%= javascript_pack_tag 'cards' %>
+<% end %>
 

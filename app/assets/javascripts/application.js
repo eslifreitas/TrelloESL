@@ -25,6 +25,4 @@
 //= require dataTables.bootstrap4.min
 //= require sb-admin.min
 
-
-
 //= require_tree .
