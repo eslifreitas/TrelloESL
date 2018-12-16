@@ -6890,6 +6890,11 @@ vue-turbolinks@^2.0.3:
   dependencies:
     vue "^2.2.4"
 
+vue2-filters@^0.0.0:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/vue2-filters/-/vue2-filters-0.4.1.tgz#c72e697addc02b313b80b69c123c14cdee962cf5"
+  integrity sha512-I4r3oZ7u4DBjHr6+DhRBG8I/BWPnu45Z3D5nDSyHMYxOrpSN7g7ZetZoVZ366spxw1w0Dj8e2XlvAGev8sePqg==
+
 vue@^2.2.4, vue@^2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"

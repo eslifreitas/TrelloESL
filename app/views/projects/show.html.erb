@@ -2,7 +2,6 @@
   project = @project 
   histories = project.histories
 %> 
-<%= project.histories.count %>
 <%= content_tag :div, id: 'histories-form', data: { histories: histories.to_json(except: [:created_at, :updated_at]) } do %>  
   <div id="cards"></div>  
 <% end %>

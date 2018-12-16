@@ -1,7 +1,9 @@
 import Vue from "vue/dist/vue.js";
 import VueDraggable from "vue-draggable";
 
+
 Vue.use(VueDraggable);
+//Vue.Use(Vue2Filters);
 
 var element = document.getElementById('histories-form');
 
@@ -14,8 +16,8 @@ if(element != null)
     data: {
         histories: histories,
         options: {
-        // dropzoneSelector: 'ul',
-        // draggableSelector: 'li',
+            dropzoneSelector: 'ul',
+            draggableSelector: 'li',
         // excludeOlderBrowsers: true,
         // showDropzoneAreas: true,
         // multipleDropzonesItemsDraggingEnabled: true,
@@ -37,10 +39,8 @@ if(element != null)
                         PENDING
                     </div>
                     <div class="card-body">            
-                        <ul class="uledited list-group list-group-flush">
-                            <div v-for="historie in histories.find_by status: 'Pending'" :key="historie.id">
-                                <li class="list-group-item">{{ historie.name }}</li>
-                            </div>                                                        
+                        <ul class="uledited list-group list-group-flush">                            
+                            <li v-for="historie in histories" :key="historie.id" class="list-group-item">{{ historie.name }}</li>                            
                         </ul>
                     </div>
                 </div>
@@ -51,11 +51,9 @@ if(element != null)
                         STARTED
                     </div>        
                     <div class="card-body">            
-                        <ul class="uledited list-group list-group-flush"">
-                            <li class="list-group-item">Item 1</li>
-                            <li class="list-group-item">Item 2</li>
-                            <li class="list-group-item">Item 3</li>
-                        </ul>                       
+                        <ul class="uledited list-group list-group-flush">                            
+                            <li v-for="historie in histories" :key="historie.id" class="list-group-item">{{ historie.name }}</li>                            
+                        </ul>  
                     </div>
                 </div>
             </div>
@@ -65,11 +63,9 @@ if(element != null)
                         DELIVERED
                     </div>        
                     <div class="card-body">            
-                        <ul class="uledited list-group list-group-flush"">
-                            <li class="list-group-item">Item 1</li>
-                            <li class="list-group-item">Item 2</li>
-                            <li class="list-group-item">Item 3</li>
-                        </ul>                            
+                        <ul class="uledited list-group list-group-flush">                            
+                            <li v-for="historie in histories" :key="historie.id" class="list-group-item">{{ historie.name }}</li>                            
+                        </ul>                 
                     </div>
                 </div>
             </div>
@@ -79,16 +75,14 @@ if(element != null)
                         ACCEPTED
                     </div>        
                     <div class="card-body">            
-                        <ul class="uledited list-group list-group-flush"">
-                            <li class="list-group-item">Item 1</li>
-                            <li class="list-group-item">Item 2</li>
-                            <li class="list-group-item">Item 3</li>
-                        </ul>                            
+                        <ul class="uledited list-group list-group-flush">                            
+                            <li v-for="historie in histories" :key="historie.id" class="list-group-item">{{ historie.name }}</li>                            
+                        </ul>         
                     </div>
                 </div>
             </div>
         </div>
     </div>
     `
-    }).$mount("#cards");
+    })
 }
