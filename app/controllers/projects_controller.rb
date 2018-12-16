@@ -7,12 +7,13 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @project = Project.new
-    @project.build_manager
+    @project.build_manager    
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+    
   end
 
   # GET /projects/new
