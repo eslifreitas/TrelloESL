@@ -38,7 +38,7 @@ document.addEventListener('turbolinks:load',() =>
             )
           }
           else {
-            this.$http.put('/projects/'+project.id, {project: this.project}).then(response => {     
+            this.$http.put('/projects/'+project.id, {histories: this.histories}).then(response => {     
               this.project = response.data;        
               Turbolinks.visit('/projects/'+this.project.id);
               }, 

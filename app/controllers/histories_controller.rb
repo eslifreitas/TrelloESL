@@ -47,6 +47,7 @@ class HistoriesController < ApplicationController
     respond_to do |format|
 
       if @history.update(history_params)
+        flash[:notice] = "Item salvo com sucesso" 
         format.html { redirect_to @history, notice: 'History was successfully updated.' }
         format.json { render :show, status: :ok, location: @history }
       else

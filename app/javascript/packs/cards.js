@@ -1,9 +1,15 @@
 import Vue from "vue/dist/vue.js";
 import VueDraggable from "vue-draggable";
+import Vue2Filters from "vue2-filters";
+import VueResource from 'vue-resource'
 
-
+Vue.use(VueResource)
 Vue.use(VueDraggable);
-//Vue.Use(Vue2Filters);
+Vue.use(Vue2Filters);
+
+
+Vue.http.headers.common['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+Vue.http.headers.common['Authorization'] = 'Bearer TOKEN';
 
 var element = document.getElementById('histories-form');
 
@@ -13,15 +19,41 @@ if(element != null)
 
     new Vue({
     el: element,
+    mixins : [ Vue2Filters . mixin ],        
     data: {
         histories: histories,
+        json: {},
         options: {
             dropzoneSelector: 'ul',
             draggableSelector: 'li',
         // excludeOlderBrowsers: true,
         // showDropzoneAreas: true,
         // multipleDropzonesItemsDraggingEnabled: true,
-        // onDrop(event) {},
+         onDrop(event) {
+                //console.log(event);                
+                console.log("id board origem: " + event.owner.id + " -- id board destino: " + event.droptarget.id + " -- id do history alterado: " + event.items[0].id);                
+            
+            if (event.owner.id != event.droptarget.id){                
+
+                Vue.http.get(/histories/+event.items[0].id).then(response =>{
+                    //console.log(response.data);
+                    var _history;
+                    this.json = response.data;
+                    _history = response.data;
+                    _history.status = event.droptarget.id;
+                    console.log(_history);
+
+                    Vue.http.put('/histories/'+_history.id, {history: _history}).then(response => {     
+                        console.log("status alterado");
+                        }, 
+                        response => {
+                            console.log(response);
+                        }
+                    );    
+
+                });                                
+            }                          
+         },
         // onDragstart(event) {
         //   event.stop();
         // },
@@ -39,8 +71,8 @@ if(element != null)
                         PENDING
                     </div>
                     <div class="card-body">            
-                        <ul class="uledited list-group list-group-flush">                            
-                            <li v-for="historie in histories" :key="historie.id" class="list-group-item">{{ historie.name }}</li>                            
+                        <ul id='Pending' class="uledited list-group list-group-flush">                            
+                            <li v-for="(history,key) in filterBy(histories,'Pending','status')" :id="history.id" class="list-group-item">{{ history.name }}</li>                            
                         </ul>
                     </div>
                 </div>
@@ -51,8 +83,8 @@ if(element != null)
                         STARTED
                     </div>        
                     <div class="card-body">            
-                        <ul class="uledited list-group list-group-flush">                            
-                            <li v-for="historie in histories" :key="historie.id" class="list-group-item">{{ historie.name }}</li>                            
+                        <ul id='Started' class="uledited list-group list-group-flush">                            
+                            <li v-for="(history,key) in filterBy(histories, 'Started','status')" :id="history.id" class="list-group-item">{{ history.name }}</li>                            
                         </ul>  
                     </div>
                 </div>
@@ -63,8 +95,8 @@ if(element != null)
                         DELIVERED
                     </div>        
                     <div class="card-body">            
-                        <ul class="uledited list-group list-group-flush">                            
-                            <li v-for="historie in histories" :key="historie.id" class="list-group-item">{{ historie.name }}</li>                            
+                        <ul id='Delivered' class="uledited list-group list-group-flush">                            
+                            <li v-for="(history,key) in filterBy(histories,'Delivered','status')" :id="history.id" class="list-group-item">{{ history.name }}</li>                            
                         </ul>                 
                     </div>
                 </div>
@@ -75,8 +107,8 @@ if(element != null)
                         ACCEPTED
                     </div>        
                     <div class="card-body">            
-                        <ul class="uledited list-group list-group-flush">                            
-                            <li v-for="historie in histories" :key="historie.id" class="list-group-item">{{ historie.name }}</li>                            
+                        <ul id='Accepted' class="uledited list-group list-group-flush">                            
+                            <li v-for="(history,key) in filterBy(histories,'Accepted','status')" :id="history.id" class="list-group-item">{{ history.name }}</li>                            
                         </ul>         
                     </div>
                 </div>

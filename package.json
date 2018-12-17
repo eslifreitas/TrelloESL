@@ -14,7 +14,7 @@
     "vue-select": "^2.5.1",
     "vue-template-compiler": "^2.5.17",
     "vue-turbolinks": "^2.0.3",
-    "vue2-filters": "^0.0.0"
+    "vue2-filters": "^0.4.1"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
