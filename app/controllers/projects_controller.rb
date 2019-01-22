@@ -24,6 +24,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    
   end
 
   # POST /projects
@@ -45,7 +46,9 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
-  def update
+  def update    
+    #raise params.inspect
+    
     respond_to do |format|
       if @project.update(project_params)
         #flash[:success] = "Projeto atualizado com sucesso"          
