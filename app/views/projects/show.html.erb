@@ -1,7 +1,17 @@
 <% 
   project = @project 
   histories = project.histories
+  historie = histories.new
 %> 
+
+<div class="row">
+  <div class="col-xl-3 col-sm-6 mb-3">
+    <span class="float-left"> 
+        <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Historie_new"><i class='fa fa-plus'></i></a> 
+    </span>
+  </div>
+</div>
+
 <%= content_tag :div, id: 'histories-form', data: { histories: histories.to_json(except: [:created_at, :updated_at]) } do %>  
   <div id="cards"></div>  
 <% end %>
@@ -10,3 +20,70 @@
 <% content_for :footer do %>
     <%= javascript_pack_tag 'cards' %>
 <% end %>
+
+
+<!-- modal Project -->
+<div class="modal fade" id="Historie_new" tabindex="-1" role="dialog" aria-labelledby="Adicionar História" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="historieTitle">Adicionar História</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      
+      <%= content_tag :div, id: 'historie-form', data: { historie: historie.to_json(except: [:created_at, :updated_at]) } do %>  
+         <div class="form-group">
+          
+            <label for="name" class="cols-sm-2 control-label">História</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+                <input type="text" class="form-control" type="text" v-model="historie.name"/>
+              </div>
+            </div>
+
+            <label for="name" class="cols-sm-2 control-label">Requisitante</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+                <select v-model="historie.requester_id" class="form-control">
+                  <option></option>
+                  <%= options_from_collection_for_select(@person_options_for_select, :id, :name,  historie.requester_id) %>
+                </select>
+              </div>
+            </div>
+
+            <label for="name" class="cols-sm-2 control-label">Proprietário</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+                <select v-model="historie.owner_id" class="form-control">
+                  <option></option>
+                  <%= options_from_collection_for_select(@person_options_for_select, :id, :name,  historie.owner_id) %>
+                </select>
+              </div>
+            </div>
+
+            <label for="name" class="cols-sm-2 control-label">Descrição</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
+                <input type="text" class="form-control" type="text" v-model="historie.description"/>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      <% end %>
+
+      <div class=modal-footer">
+        <button @click="validateProject() ? saveProject($event) : false" class="btn btn-success btn-sm btn-block">Salvar</button>
+        <button class="btn btn-danger btn-sm btn-block" onclick="window.location='<%= projects_path %>'">Cancelar</button>      
+      </div>
+      
+    </div>
+  </div>
+</div>
