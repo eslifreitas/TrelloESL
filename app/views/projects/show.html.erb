@@ -13,12 +13,7 @@
 </div>
 
 <%= content_tag :div, id: 'histories-form', data: { histories: histories.to_json(except: [:created_at, :updated_at]) } do %>  
-  <div id="cards"></div>  
-<% end %>
-
-
-<% content_for :footer do %>
-    <%= javascript_pack_tag 'cards' %>
+  
 <% end %>
 
 
@@ -72,9 +67,33 @@
                 <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
                 <input type="text" class="form-control" type="text" v-model="historie.description"/>
               </div>
+            </div> 
+            
+            <label for="name" class="cols-sm-2 control-label">Status</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
+                  <% 
+                    status = ["Pending", "Started" , "Delivered","Accepted"]
+                  %>
+                 <select v-model="historie.owner_id" class="form-control">
+                  <option></option>
+                  <%= options_from_collection_for_select(status, 'to_s', 'to_s',  historie.status) %>
+                </select>
+              </div>
             </div>
-
-
+          
+            <label for="name" class="cols-sm-2 control-label">Início</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+                <div id="app">                       
+                  <v-datepicker mode='single' v-model="value">                 
+                  </v-datepicker>               
+                </div>
+              </div>
+            </div>        
+            
           </div>
         </div>
       <% end %>
@@ -87,3 +106,9 @@
     </div>
   </div>
 </div>
+
+
+<% content_for :footer do %>
+    <%= javascript_pack_tag 'cards' %>
+    <%= javascript_pack_tag 'DatePicker' %>
+<% end %>
