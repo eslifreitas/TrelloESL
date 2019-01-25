@@ -14,6 +14,20 @@ setupCalendar({
 //Vue.component('v-calendar', Calendar);
 //Vue.component('v-datepicker', Calendar.DatePicker);
 
+function getDefaultData(_history) {  
+  _history.name = "";
+  _history.requester_id = null;
+  _history.status = "";
+  _history.owner_id = null;
+  _history.description = "";
+  _history.started_at = null;
+  _history.finished_at = null;
+  _history.deadline = null;
+  _history.points = null;
+  
+  return _history;
+}
+
 document.addEventListener('turbolinks:load', () => {
   Vue.http.headers.common['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   Vue.http.headers.common['Authorization'] = 'Bearer TOKEN';
@@ -37,7 +51,7 @@ document.addEventListener('turbolinks:load', () => {
         saveHistory: function (e) {          
           if (history.id == null) {
             this.$http.post('/histories', { history: this.history }).then(response => {
-              this.history = response.data;
+              getDefaultData(history);              
               //Turbolinks.visit('/projects/' + this.project.id)
             },
               response => {
@@ -47,7 +61,7 @@ document.addEventListener('turbolinks:load', () => {
           }
           else {
             this.$http.put('/histories/' + history.id, { history: this.history }).then(response => {
-              this.history = response.data;
+              getDefaultData(history)
               //Turbolinks.visit('/projects/' + this.project.id);
             },
               response => {
@@ -55,7 +69,11 @@ document.addEventListener('turbolinks:load', () => {
               }
             )
           }
-        }
+        },
+        clearModel: function(e){          
+          history = getDefaultData(history);
+          //this.history = initialState();
+        }      
       },
       components: {
         'v-calendar': Calendar,
