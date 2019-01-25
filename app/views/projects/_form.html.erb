@@ -37,13 +37,9 @@
 
     </div> 
   </div>
-  
-
-  <div class="modal-footer">        
-    <button @click="validateProject() ? saveProject($event) : false" class="btn btn-success btn-sm btn-block">Salvar</button><br/>
-    <button class="btn btn-danger btn-sm btn-block" onclick="window.location='<%= projects_path %>'">Cancelar</button>      
-  </div>
-<div id="teste"></div>
+     
+  <button @click="validateProject() ? saveProject($event) : false" class="btn btn-success btn-sm btn-block">Salvar</button><br/>
+  <button class="btn btn-danger btn-sm btn-block" onclick="window.location='<%= projects_path %>'">Cancelar</button>      
 
 
 <% end %>
