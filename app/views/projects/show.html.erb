@@ -12,8 +12,8 @@
   </div>
 </div>
 
-<% content_for :head do %>
-  <%= javascript_pack_tag 'DatePicker' %>
+<% content_for :head do %>  
+  <%= javascript_pack_tag 'history' %>
 <% end %>
   
 <!-- Cards -->
@@ -22,97 +22,116 @@
 <!-- modal history -->
 <div class="modal fade" id="History_new" tabindex="-1" role="dialog" aria-labelledby="Adicionar História" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <%= content_tag :div, id: 'history-form', data: { history: history.to_json(except: [:created_at, :updated_at]) } do %>     
-        <div class="modal-header">
-          <h5 class="modal-title" id="historyTitle">Adicionar História</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close" @click="clearModel($event)">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-               
-        <div class="modal-body">
-          <div class="form-group">
-          
-            <label for="name" class="cols-sm-2 control-label">História</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
-                <input type="text" class="form-control" type="text" v-model="history.name"/>
-              </div>
-            </div>
 
-            <label for="name" class="cols-sm-2 control-label">Requisitante</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
-                <select v-model="history.requester_id" class="form-control">
-                  <option></option>
-                  <%= options_from_collection_for_select(@person_options_for_select, :id, :name,  history.requester_id) %>
-                </select>
-              </div>
-            </div>
-
-            <label for="name" class="cols-sm-2 control-label">Proprietário</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
-                <select v-model="history.owner_id" class="form-control">
-                  <option></option>
-                  <%= options_from_collection_for_select(@person_options_for_select, :id, :name,  history.owner_id) %>
-                </select>
-              </div>
-            </div>
-
-            <label for="name" class="cols-sm-2 control-label">Descrição</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
-                <input type="text" class="form-control" type="text" v-model="history.description"/>
-              </div>
-            </div> 
-            
-            <label for="name" class="cols-sm-2 control-label">Status</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
-                  <% 
-                    status = ["Pending", "Started" , "Delivered","Accepted"]
-                  %>
-                  <select v-model="history.status" class="form-control">
-                  <option></option>
-                  <%= options_from_collection_for_select(status, 'to_s', 'to_s',  history.status) %>
-                </select>
-              </div>
-            </div>
-            
-            <label for="name" class="cols-sm-2 control-label">Início</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>                                           
-                  <v-datepicker mode='single' v-model="history.started_at">                 
-                  </v-datepicker>                               
-              </div>
-            </div>  
-
-            <label for="name" class="cols-sm-2 control-label">Pontos</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
-                <input type="text" class="form-control" type="text" v-model="history.points"/>
-              </div>
-            </div> 
-
-            <div class=modal-footer">
-              <button @click="saveHistory($event)" class="btn btn-success btn-sm btn-block">Salvar</button>
-              <button class="btn btn-danger btn-sm btn-block" onclick="window.location='<%= projects_path %>'">Cancelar</button>      
-            </div>
+    <%= content_tag :div, id: 'history-form', data: { history: history.to_json(except: [:created_at, :updated_at]), histories: histories.to_json(except: [:created_at, :updated_at]) } do %>     
+      <div class="modal-content">
+        
+          <div class="modal-header">
+            <h5 class="modal-title" id="historyTitle">Adicionar História</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close" @click="clearModel($event)">
+              <span aria-hidden="true">×</span>
+            </button>
           </div>
-        </div>
-  
-      <% end %>
+                
+          <div class="modal-body">
+            <div class="form-group">
+            
+              <label for="name" class="cols-sm-2 control-label">História</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+                  <input type="text" class="form-control" type="text" v-model="history.name"/>
+                </div>
+              </div>
+
+              <label for="name" class="cols-sm-2 control-label">Requisitante</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+                  <select v-model="history.requester_id" class="form-control">
+                    <option></option>
+                    <%= options_from_collection_for_select(@person_options_for_select, :id, :name,  history.requester_id) %>
+                  </select>
+                </div>
+              </div>
+
+              <label for="name" class="cols-sm-2 control-label">Proprietário</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>            
+                  <select v-model="history.owner_id" class="form-control">
+                    <option></option>
+                    <%= options_from_collection_for_select(@person_options_for_select, :id, :name,  history.owner_id) %>
+                  </select>
+                </div>
+              </div>
+
+              <label for="name" class="cols-sm-2 control-label">Descrição</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
+                  <input type="text" class="form-control" type="text" v-model="history.description"/>
+                </div>
+              </div> 
+              
+              <label for="name" class="cols-sm-2 control-label">Status</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
+                    <% 
+                      status = ["Pending", "Started" , "Delivered","Accepted"]
+                    %>
+                    <select v-model="history.status" class="form-control">
+                    <option></option>
+                    <%= options_from_collection_for_select(status, 'to_s', 'to_s',  history.status) %>
+                  </select>
+                </div>
+              </div>
+
+              <label for="name" class="cols-sm-2 control-label">Prazo</label>                        
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>                                           
+                  <v-datepicker mode='single' popover-visibility="focus" v-model="history.deadline">                 
+                  </v-datepicker>      
+                </div>
+              </div>            
+
+              <label for="name" class="cols-sm-2 control-label">Início</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>                                           
+                  <v-datepicker mode='single' popover-visibility="focus" v-model="history.started_at">                 
+                  </v-datepicker>     
+                </div>
+              </div>  
+
+              <label for="name" class="cols-sm-2 control-label">Término</label>
+              <div class="cols-sm-10">
+                <div class="input-group">                
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>                                           
+                  <v-datepicker mode='single' popover-visibility="focus" v-model="history.finished_at">                 
+                  </v-datepicker>                                               
+                </div>
+              </div>  
+
+              <label for="name" class="cols-sm-2 control-label">Pontos</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="far fa-comment" aria-hidden="true"></i></span>            
+                  <input type="text" class="form-control" type="text" v-model="history.points"/>
+                </div>
+              </div> 
+
+              <div class=modal-footer">
+                <button @click="saveHistory($event)" class="btn btn-success btn-sm btn-block">Salvar</button>
+                <button class="btn btn-danger btn-sm btn-block" @click="clearModel($event)" onclick="javascript:$('#History_new').modal('hide');">Cancelar</button>      
+              </div>
+            </div>
+          </div>    
+      </div>
     
-    </div>
+      <% end %>
   </div>
 </div>
 
@@ -121,8 +140,7 @@
   <script>
     $(".modal").on('hidden.bs.modal', function (e) {           
       $(".modal-body input").val('');                
-      $(".modal-body select").prop('selectedIndex',0);
-      
+      $(".modal-body select").prop('selectedIndex',0);      
     });
   </script>
 <% end %>

@@ -22,6 +22,7 @@ if(element != null)
         mixins : [ Vue2Filters . mixin ],        
         data: {
             histories: histories,        
+            id: 0,
             options: {
                 dropzoneSelector: 'ul',
                 draggableSelector: 'li',
@@ -84,7 +85,12 @@ if(element != null)
                     }
                 }
             }
-        },        
+        },  
+        methods: {
+            forceRerender() {
+                this.id += 1;  
+            }
+        },     
         template: ` 
         <div v-drag-and-drop:options="options"> 
             <div class="row">      
@@ -95,7 +101,7 @@ if(element != null)
                         </div>
                         <div class="card-body">            
                             <ul id='Pending' class="uledited list-group list-group-flush">                            
-                                <li v-for="(history,key) in filterBy(histories,'Pending','status')" :id="history.id" class="list-group-item">{{ history.name }}</li>                            
+                                <li v-for="(history,key) in filterBy(histories,'Pending','status')" :id="history.id" :key="history.id" class="list-group-item">{{ history.name }}</li>                            
                             </ul>
                         </div>
                     </div>
@@ -107,7 +113,7 @@ if(element != null)
                         </div>        
                         <div class="card-body">            
                             <ul id='Started' class="uledited list-group list-group-flush">                            
-                                <li v-for="(history,key) in filterBy(histories, 'Started','status')" :id="history.id" class="list-group-item">{{ history.name }}</li>                            
+                                <li v-for="(history,key) in filterBy(histories, 'Started','status')" :id="history.id"  :key="history.id" class="list-group-item">{{ history.name }}</li>                            
                             </ul>  
                         </div>
                     </div>
@@ -119,7 +125,7 @@ if(element != null)
                         </div>        
                         <div class="card-body">            
                             <ul id='Delivered' class="uledited list-group list-group-flush">                            
-                                <li v-for="(history,key) in filterBy(histories,'Delivered','status')" :id="history.id" class="list-group-item">{{ history.name }}</li>                            
+                                <li v-for="(history,key) in filterBy(histories,'Delivered','status')" :id="history.id" :key="history.id" class="list-group-item">{{ history.name }}</li>                            
                             </ul>                 
                         </div>
                     </div>
@@ -131,7 +137,7 @@ if(element != null)
                         </div>        
                         <div class="card-body">            
                             <ul id='Accepted' class="uledited list-group list-group-flush">                            
-                                <li v-for="(history,key) in filterBy(histories,'Accepted','status')" :id="history.id" class="list-group-item">{{ history.name }}</li>                            
+                                <li v-for="(history,key) in filterBy(histories,'Accepted','status')" :id="history.id" :key="history.id" class="list-group-item">{{ history.name }}</li>                            
                             </ul>         
                         </div>
                     </div>
