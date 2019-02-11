@@ -32,31 +32,30 @@ document.addEventListener('turbolinks:load', () => {
     Vue.http.headers.common['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     Vue.http.headers.common['Authorization'] = 'Bearer TOKEN';
 
-    var element = document.getElementById('history-form');    
+    var element = document.getElementById('histories-form');    
+
 
     if (element != null) {
-
-        var history = JSON.parse(element.dataset.history);
-        var histories = JSON.parse(element.dataset.histories);
-
+        console.log(element);
+        var histories = JSON.parse(element.dataset.histories);        
+        var history = JSON.parse(document.getElementById('history-form').dataset.history);
+        
         var app = new Vue(
         {
             el: element,
             data() {
                 return {
                     value: null,
-                    history: history,
+                    history: history,            
                     histories: histories
                 }
             },
             methods: {
                 saveHistory: function (e) {
                     if (history.id == null) {
-                        this.$http.post('/histories', { history: this.history }).then(response => {
-                            console.log(histories.length);
-                            this.history = response.data;        
-                            histories.push(this.history);                            
-                            console.log(histories.length);
+                        this.$http.post('/histories', { history: this.history }).then(response => {                                                                
+                            this.history = response.data;
+                            histories.push(this.history)
                             getDefaultData(history);
                             $('#History_new').modal('hide');                            
                         },

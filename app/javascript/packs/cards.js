@@ -35,7 +35,7 @@ if(element != null)
                     
                     if (event.owner.id != event.droptarget.id){                
 
-                        Vue.http.get(/histories/+event.items[0].id).then(response =>{
+                        Vue.http.get('/histories/'+event.items[0].id).then(response =>{
                             //console.log(response.data);
                             var _history;                     
                             _history = response.data;
@@ -53,9 +53,10 @@ if(element != null)
                         });                                
                     }                          
                 },
-                // onDragstart(event) {
-                //   event.stop();
-                // },
+                 //onDragstart(event) {
+                 //   alert('teste');
+                 //  event.stop();
+                 //},
                 onDragend(event) {
                     var status = event.droptarget.id;
                     var status_was = event.owner.id;
@@ -101,7 +102,7 @@ if(element != null)
                         </div>
                         <div class="card-body">            
                             <ul id='Pending' class="uledited list-group list-group-flush">                            
-                                <li v-for="(history,key) in filterBy(histories,'Pending','status')" :id="history.id" :key="history.id" class="list-group-item">{{ history.name }}</li>                            
+                                <li @click="alert('teste')" v-for="(history,key) in filterBy(histories,'Pending','status')" :id="history.id" :key="history.id" class="list-group-item">{{ history.name }}</li>                            
                             </ul>
                         </div>
                     </div>
