@@ -1,11 +1,11 @@
-class CreateHistories < ActiveRecord::Migration[5.2]
+class CreateHistories < ActiveRecord::Migration[6.0]
   def change
     create_table :histories do |t|
       t.string :name
-      t.integer :requester_id
+      t.bigint :requester_id
       t.string :status, index: true
-      t.integer :owner_id
-      t.integer :project_id
+      t.bigint :owner_id
+      t.bigint :project_id
       t.text :description
       t.datetime :started_at
       t.datetime :finished_at
