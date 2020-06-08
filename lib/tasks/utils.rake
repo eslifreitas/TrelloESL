@@ -32,9 +32,9 @@ namespace :utils do
           owner_id: Person.all.sample.id,
           project_id: project.id,
           description: Faker::Lorem.sentence,
-          started_at: Faker::Date.between(60.days.ago, Date.today-5),
-          finished_at: Faker::Date.between(5.days.ago, Date.today),
-          deadline: Faker::Date.forward(Random.rand(10)),
+          started_at: Faker::Date.between(from: 60.days.ago, to: Date.today-5),
+          finished_at: Faker::Date.between(from: 5.days.ago, to: Date.today),
+          deadline: Faker::Date.forward(days: Random.rand(10)),
           points: 1
         )
       end
