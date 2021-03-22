@@ -41,6 +41,9 @@ class HistoriesController < ApplicationController
     end
   end
 
+  def teste1
+
+  end
   # PATCH/PUT /histories/1
   # PATCH/PUT /histories/1.json
   def update
